@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from .models import Movie
+from .models import Movie, Review
 
 
 class MovieListSerializer(serializers.ModelSerializer):
-    """Список фильмов"""
+    """Список фільмів"""
 
     class Meta:
         model = Movie
@@ -12,7 +12,7 @@ class MovieListSerializer(serializers.ModelSerializer):
 
 
 class MovieDetailSerializer(serializers.ModelSerializer):
-    """Полный фильм"""
+    """Повна інформація про фільм"""
     category = serializers.SlugRelatedField(slug_field="name", read_only=True)
     directors = serializers.SlugRelatedField(slug_field="name", read_only=True, many=True)
     actors = serializers.SlugRelatedField(slug_field="name", read_only=True, many=True)
@@ -21,3 +21,11 @@ class MovieDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         exclude = ("draft", )
+
+
+class ReviewCreateSerializer(serializers.ModelSerializer):
+    """Додавання коментаря"""
+
+    class Meta:
+        model = Review
+        fields = "__all__"
