@@ -11,6 +11,13 @@ class MovieListSerializer(serializers.ModelSerializer):
         fields = ("title", "tagline", "category")
 
 
+class RecursiveSerializer(serializers.Serializer):
+    """Виведення рекурсивно children"""
+    def to_representation(self, value):
+        serializer = self.parent.parent.__class__(value, context=self.context)
+        return serializer.data
+
+
 class ReviewCreateSerializer(serializers.ModelSerializer):
     """Додавання коментаря"""
 
@@ -21,10 +28,11 @@ class ReviewCreateSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     """Виведення коментарів"""
+    children = RecursiveSerializer(many=True)
 
     class Meta:
         model = Review
-        fields = ("name", "text", "parent")
+        fields = ("name", "text", "children")
 
 
 class MovieDetailSerializer(serializers.ModelSerializer):
