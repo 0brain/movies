@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Movie, Review, Rating
+from .models import Movie, Review, Rating, Actor
 
 
 class FilterReviewListSerializer(serializers.ListSerializer):
@@ -15,6 +15,13 @@ class RecursiveSerializer(serializers.Serializer):
     def to_representation(self, value):
         serializer = self.parent.parent.__class__(value, context=self.context)
         return serializer.data
+
+
+class ActorListSerializer(serializers.ModelSerializer):
+    """Виведення списку акторів та режисерів"""
+    class Meta:
+        model = Actor
+        fields = ("id", "name", "image")
 
 
 class MovieListSerializer(serializers.ModelSerializer):
