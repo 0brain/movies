@@ -24,6 +24,13 @@ class ActorListSerializer(serializers.ModelSerializer):
         fields = ("id", "name", "image")
 
 
+class ActorDetailSerializer(serializers.ModelSerializer):
+    """Виведення повного опису актора чи режисера"""
+    class Meta:
+        model = Actor
+        fields = "__all__"
+
+
 class MovieListSerializer(serializers.ModelSerializer):
     """Список фільмів"""
     rating_user = serializers.BooleanField()
