@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 
 from .models import Movie, Actor
 from .serializers import MovieListSerializer, MovieDetailSerializer, ReviewCreateSerializer, CreateRatingSerializer, \
-    ActorListSerializer
+    ActorListSerializer, ActorDetailSerializer
 from .service import get_client_ip
 
 
@@ -54,3 +54,9 @@ class ActorsListView(generics.ListAPIView):
     """Виведення списку акторів"""
     queryset = Actor.objects.all()
     serializer_class = ActorListSerializer
+
+
+class ActorsDetailView(generics.RetrieveAPIView):
+    """Виведення детальної інформації про актора чи режисера"""
+    queryset = Actor.objects.all()
+    serializer_class = ActorDetailSerializer
