@@ -22,12 +22,10 @@ class MovieListView(generics.ListAPIView):
         return movies
 
 
-class MovieDetailView(APIView):
+class MovieDetailView(generics.RetrieveAPIView):
     """Виводить фільм в деталях"""
-    def get(self, request, pk):
-        movie = Movie.objects.get(id=pk, draft=False)
-        serializer = MovieDetailSerializer(movie)
-        return Response(serializer.data)
+    queryset = Movie.objects.filter(draft=False)
+    serializer_class = MovieDetailSerializer
 
 
 class ReviewCreateView(APIView):
