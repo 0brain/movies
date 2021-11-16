@@ -1,7 +1,6 @@
 from django.db import models
 from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework.views import APIView
+
 
 from .models import Movie, Actor
 from .serializers import MovieListSerializer, MovieDetailSerializer, ReviewCreateSerializer, CreateRatingSerializer, \
