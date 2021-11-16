@@ -28,13 +28,9 @@ class MovieDetailView(generics.RetrieveAPIView):
     serializer_class = MovieDetailSerializer
 
 
-class ReviewCreateView(APIView):
+class ReviewCreateView(generics.CreateAPIView):
     """Додає коментар до фільму"""
-    def post(self, request):
-        review = ReviewCreateSerializer(data=request.data)
-        if review.is_valid():
-            review.save()
-        return Response(status=201)
+    serializer_class = ReviewCreateSerializer
 
 
 class AddStarRatingView(APIView):
